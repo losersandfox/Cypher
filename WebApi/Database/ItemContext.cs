@@ -16,20 +16,21 @@ namespace Database
         { }
 
         DbSet<User> Users { get; set; }
+        DbSet<PhyHost> PhyHosts { get; set; }
+        DbSet<VirtualHost> VirtualHosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<User>().ToTable("Users");
+            builder.Entity<PhyHost>().ToTable("PhyHost");
+            builder.Entity<VirtualHost>().ToTable("VirtaulHost");
+
             builder.Entity<User>()
                 .HasMany<PhyHost>(u => u.LinksHosts)
                 .WithOne(h => h.User)
                 .HasForeignKey(h => h.UserId)
-                .IsRequired();
-
-            builder.Entity<User>()
-                .HasOne(u => u.NowHost)
-                .WithOne(h => h.User)
-                .HasForeignKey<PhyHost>(h => h.UserId)
                 .IsRequired();
 
             builder.Entity<PhyHost>()
@@ -37,25 +38,6 @@ namespace Database
                 .WithOne(v => v.Host)
                 .HasForeignKey(v => v.HostId)
                 .IsRequired();
-
-            builder.Entity<PhyHost>()
-                .HasOne(h => h.SysData)
-                .WithOne(s => s.Host)
-                .HasForeignKey<PhyHost>(s => s.HostId)
-                .IsRequired();
-
-            builder.Entity<VirtualHost>()
-                .HasOne(v => v.VirtualSysData)
-                .WithOne(s => s.VirtualHost)
-                .HasForeignKey<VirtualHost>(s => s.VirtualHostId)
-                .IsRequired();
-
-            builder.Entity<SysData>()
-                .HasMany(s => s.processes)
-                .WithOne(p => p.SysData)
-                .HasForeignKey(p => p.SysDataId)
-                .IsRequired();
-
         }
     }
 }

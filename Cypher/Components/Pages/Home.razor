@@ -1,0 +1,19 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<input @onchange="InputEvent"></input>
+<p @message></p>
+
+@code{
+    string message = "";
+    private void InputEvent(ChangeEventArgs args)
+    {
+        message = (string)args.Value!;
+    }
+}
+
+
+Welcome to your new app.

@@ -15,11 +15,10 @@ namespace Entity
         public string Password { get; set; } = string.Empty;
         public string IpAddr { get; set; } = string.Empty;
         public string MacAddr { get; set; } = string.Empty;
-        public SysData SysData { get; set; } = new SysData();
         public List<VirtualHost> VirtualHosts { get; set; } = new List<VirtualHost>();
         public bool IsBoot { get; set; }
 
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public User User { get; set; } = null!;
 
     }

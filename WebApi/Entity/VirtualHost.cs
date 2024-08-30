@@ -13,7 +13,6 @@ namespace Entity
         public int VirtualHostId { get; set; }
         public string VirtualHostName { get; set; } = string.Empty;
         public string IpAddr { get; set; } = string.Empty;
-        public SysData VirtualSysData { get; set; } = new SysData();
         public bool IsBoot { get; set; }
 
         public int HostId { get; set; }
